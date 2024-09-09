@@ -1,0 +1,22 @@
+packages:
+  darwin:
+    brews:
+      - fzf
+      - git
+      - git-lfs
+      - gh
+      - jq
+      - neovim
+      - ripgrep
+      - yq
+  ubuntu:
+    apts:
+      - fzf
+      - git
+      - git-lfs
+      - gh
+      - jq
+      - neovim
+      - ripgrep
+    apts_noble:
+      - yq

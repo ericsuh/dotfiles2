@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+MATCH=$(sed -n "$1p" < /Users/eric/.srgmatches)
+MATCH_LINE=$(echo "$MATCH" | cut -d" " -f1)
+MATCH_FILE=$(echo "$MATCH" | sed 's/'$MATCH_LINE' //')
+
+case "$EDITOR" in
+	code)
+		code --goto "${MATCH_FILE}:${MATCH_LINE}"
+		;;
+	nano | nvim | pico | vim)
+        "$EDITOR" +"${MATCH_LINE}" "${MATCH_FILE}"
+		;;
+	*)
+		echo "\$EDITOR is not set to a known editor"
+		exit 1
+		;;
+esac

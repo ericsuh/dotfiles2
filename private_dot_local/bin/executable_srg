@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+# A wrapper around ripgrep that adds a "jump to result in editor"
+# shortcut called "F". So if you do `srg my-query` and find some results,
+# you can type `F 2` to go to the second result.
+
+set -euo pipefail
+
+SHORTCUT_CMD="F"
+SHORTCUT_CMD_PATH="${HOME}/.local/bin/${SHORTCUT_CMD}"
+SHORTCUTS_MATCHES_FILE="${HOME}/.srgmatches"
+
+TMP_FILENAME=''
+
+display_shortcuts() {
+    awk -v f_name=${TMP_FILENAME} -F':' '
+    BEGIN {x=1};
+    {
+        if ($1 != f_name) {
+            printf("\n%s\n", $1);
+            f_name=$1;
+        };
+        printf("[%s] ", x);
+        printf("%s", $2);
+        for (i=3; i<= NF; i++) {
+            printf(":%s", $i);
+        }
+        printf("\n");
+        x++;
+    };'
+}
+
+strip_colors() {
+    sed -E "s/\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g"
+}
+
+format_shortcuts() {
+    awk -F':' '
+    {
+        print $2 " " $1;
+    };'
+}
+
+rg --color=always --with-filename --line-number "$@" | tee >/dev/null >(display_shortcuts) >(strip_colors | format_shortcuts > "${SHORTCUTS_MATCHES_FILE}");

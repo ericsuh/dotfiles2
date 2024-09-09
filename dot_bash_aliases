@@ -1,0 +1,16 @@
+alias ls='ls -F'
+
+# To prevent stupidity
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias ln='ln -i'
+
+# Useful tool functions
+
+function gohere() {
+    export GOPATH=$(pwd)
+}
+
+if [ -e "${HOME}/.bash_aliases_os" ];    then source "${HOME}/.bash_aliases_os"; fi
+if [ -e "${HOME}/.bash_aliases_local" ]; then source "${HOME}/.bash_aliases_local"; fi

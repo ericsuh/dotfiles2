@@ -1,0 +1,80 @@
+setopt NO_CASE_GLOB
+setopt AUTO_CD
+setopt CORRECT
+
+# History options
+
+HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
+setopt EXTENDED_HISTORY
+SAVEHIST=5000
+HISTSIZE=2000
+setopt SHARE_HISTORY
+setopt APPEND_HISTORY
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt HIST_VERIFY
+
+autoload bashcompinit && bashcompinit
+
+fpath+="$HOME/.local/share/zsh/site-functions"
+
+zstyle ':completion:*' completer _complete _ignored
+zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
+zstyle :compinstall filename ${ZDOTDIR:-$HOME}/.zshrc
+
+alias vim="nvim"
+alias nv="nvim"
+
+autoload -Uz compinit
+compinit -i
+
+bindkey \^U backward-kill-line
+
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
+
+export FZF_DEFAULT_COMMAND='rg --files --hidden'
+export FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
+export PROMPT="%2~ %# "
+export PYTHONSTARTUP="${HOME}/.pythonrc"
+if [ "\${TERM_PROGRAM:-}" = "vscode" ]; then
+  export EDITOR=code
+else
+  export EDITOR=vim
+fi
+export VISUAL=vim
+
+bindkey -e
+
+function source_exists() {
+  if [ -f "$1" ]; then
+    source "$1"
+  fi
+}
+
+if command -v fzf; then
+    source_exists "$HOME/.fzf.zsh"
+fi
+source_exists "$HOME/.zshrc_os"
+source_exists "$HOME/.zshrc_local"
+
+# pnpm
+{{ if eq .chezmoi.os "darwin" -}}
+export PNPM_HOME="$HOME/Library/pnpm"
+{{ else if eq .chezmoi.os "linux" -}}
+export PNPM_HOME="$HOME/.local/share/pnpm"
+{{ end -}}
+
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+if command -v jj; then
+  source <(jj util completion zsh)
+fi
+
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"

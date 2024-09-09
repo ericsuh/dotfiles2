@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+TEMPDIR=$(mktemp -d)
+trap "rm -rf $TEMPDIR" EXIT
+
+mkdir -p "$HOME/.local/bin"
+mkdir -p "$HOME/.local/share"
+
+{{ if eq .chezmoi.os "darwin" -}}
+
+brew update
+brew bundle --no-lock --file=/dev/stdin <<EOF
+{{ range .packages.darwin.brews -}}
+brew {{ . | quote }}
+{{ end -}}
+EOF
+curl -fsSL -o jj.tar.gz https://github.com/martinvonz/jj/releases/download/v0.21.0/jj-v0.21.0-aarch64-apple-darwin.tar.gz
+
+{{ else if (and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "ubuntu")) -}}
+
+sudo bash -c "$(curl -fsSL https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh)"
+sudo apt-get update
+sudo apt-get install --yes {{ range .packages.linux.apts }}{{ . | quote }}{{ end }}
+
+{{ if ge .chezmoi.osRelease.versionId "24.04" -}}
+sudo apt-get install --yes {{ range .packages.linux.apts_noble }}{{ . | quote }}{{ end }}
+{{ end -}}
+
+{{ if eq .chezmoi.arch "arm64" -}}
+curl -fsSL -o jj.tar.gz https://github.com/martinvonz/jj/releases/download/v0.21.0/jj-v0.21.0-aarch64-unknown-linux-musl.tar.gz
+{{ else -}}
+curl -fsSL -o jj.tar.gz https://github.com/martinvonz/jj/releases/download/v0.21.0/jj-v0.21.0-x86_64-unknown-linux-musl.tar.gz
+{{ end -}}
+
+{{ end -}}
+
+tar xzf jj.tar.gz
+mv jj $HOME/.local/bin/
+
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s - -y --no-modify-path
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
