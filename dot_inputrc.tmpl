@@ -5,3 +5,9 @@ Control-j: menu-complete
 $if Bash
 	Space: magic-space
 $endif
+
+{{ if eq .chezmoi.os "linux" -}}
+# For bash >= 4.x, not on MacOS
+set completion-prefix-display-length 2
+Control-k: menu-complete-backward
+{{ end -}}

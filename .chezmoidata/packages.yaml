@@ -1,6 +1,7 @@
 packages:
   darwin:
     brews:
+      - fish
       - fzf
       - git
       - git-lfs
@@ -10,7 +11,10 @@ packages:
       - ripgrep
       - yq
   ubuntu:
+    apt_repository:
+      - ppa:fish-shell/release-3
     apts:
+      - fish
       - fzf
       - git
       - git-lfs

@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+temp_path="$(cat /etc/paths | tr '\n' ':')"
+
+for f in /etc/paths.d/*; do
+    temp_path="$(cat "$f" | tr '\n' ':'):$temp_path"
+done
+
+for g in $HOME/.config/paths.d/*; do
+    temp_path="$(cat "$g" | tr '\n' ':'):$temp_path"
+done
+
+echo "${temp_path%:}" | sed 's/::/:/g'

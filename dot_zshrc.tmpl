@@ -70,7 +70,15 @@ if command -v nodenv >/dev/null; then
   eval "$(nodenv init -)"
 fi
 
-PATH="$($HOME/.local/bin/paths_helper)
+PATH="$($HOME/.local/bin/paths_helper)"
 export PATH
+
+# Evaluated on login, so affects scripts
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Added by OrbStack: command-line tools and integration
+# Comment this line if you don't want it to be added again.
+# source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+source_exists ~/.orbstack/shell/init.zsh 2>/dev/null || :
 
 source_exists "$HOME/.zshrc_local"
