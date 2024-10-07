@@ -1,0 +1,7 @@
+{{ if eq .chezmoi.os "darwin" -}}
+source /opt/homebrew/opt/fzf/shell/key-bindings.bash
+source /opt/homebrew/opt/fzf/shell/completion.bash
+{{ else if eq .chezmoi.os "linux" -}}
+source /usr/share/doc/fzf/examples/key-bindings.bash
+source /usr/share/doc/fzf/examples/completion.bash
+{{ end -}}

@@ -54,27 +54,23 @@ function source_exists() {
   fi
 }
 
-if command -v fzf; then
-    source_exists "$HOME/.fzf.zsh"
-fi
-source_exists "$HOME/.zshrc_os"
-source_exists "$HOME/.zshrc_local"
-
-# pnpm
 {{ if eq .chezmoi.os "darwin" -}}
-export PNPM_HOME="$HOME/Library/pnpm"
+source_exists /opt/homebrew/opt/fzf/shell/key-bindings.zsh
+source_exists /opt/homebrew/opt/fzf/shell/completion.zsh
 {{ else if eq .chezmoi.os "linux" -}}
-export PNPM_HOME="$HOME/.local/share/pnpm"
+source_exists /usr/share/doc/fzf/examples/key-bindings.zsh
+source_exists /usr/share/doc/fzf/examples/completion.zsh
 {{ end -}}
 
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-
-if command -v jj; then
+if command -v jj >/dev/null; then
   source <(jj util completion zsh)
 fi
 
-export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+if command -v nodenv >/dev/null; then
+  eval "$(nodenv init -)"
+fi
+
+PATH="$($HOME/.local/bin/paths_helper)
+export PATH
+
+source_exists "$HOME/.zshrc_local"

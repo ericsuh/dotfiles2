@@ -1,0 +1,18 @@
+alias ls='ls -F'
+
+# To prevent stupidity
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias ln='ln -i'
+
+{{ if eq .chezmoi.os "darwin" -}}
+function ql() {
+  qlmanage -p "$@" >& /dev/null
+}
+{{ else if eq .chezmoi.os "linux" -}}
+{{ end -}}
+
+if [ -f "${HOME}/.bash_aliases_local" ]; then
+  source "${HOME}/.bash_aliases_local"
+fi

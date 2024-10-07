@@ -1,0 +1,9 @@
+~/.local/bin
+~/.cargo/bin
+~/.nodenv/shims
+~/.pyenv/shims
+{{ if eq .chezmoi.os "darwin" -}}
+~/Library/pnpm
+{{ else if eq .chezmoi.os "linux" -}}
+~/.local/share/pnpm"
+{{ end -}}
