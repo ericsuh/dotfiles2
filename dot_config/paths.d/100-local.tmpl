@@ -1,10 +1,10 @@
-{{ .chezmoi.homeDir }}/.local/bin
-{{ .chezmoi.homeDir }}/.cargo/bin
-{{ .chezmoi.homeDir }}/.nodenv/shims
-{{ .chezmoi.homeDir }}/.pyenv/shims
 {{ if eq .chezmoi.os "darwin" -}}
 /opt/homebrew/bin
 {{ .chezmoi.homeDir }}/Library/pnpm
 {{ else if eq .chezmoi.os "linux" -}}
 {{ .chezmoi.homeDir }}/.local/share/pnpm"
 {{ end -}}
+{{ .chezmoi.homeDir }}/.cargo/bin
+{{ .chezmoi.homeDir }}/.nodenv/shims
+{{ .chezmoi.homeDir }}/.pyenv/shims
+{{ .chezmoi.homeDir }}/.local/bin

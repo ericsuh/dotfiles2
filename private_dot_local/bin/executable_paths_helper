@@ -2,17 +2,34 @@
 
 set -euo pipefail
 
-TEMP_FILE=$(mktemp)
-trap 'rm "$TEMP_FILE" || true' TRAP
+read_paths() {
+    local TEMP_PATH="$1"
+    while IFS="" read -r p; do
+        if [ -z "$p" ] || (echo "$p" | grep -q '#.*'); then
+            continue
+        fi
+        TEMP_PATH="${TEMP_PATH:+${TEMP_PATH}:}${p//~/$HOME}"
+    done < "$2"
+    echo "$TEMP_PATH"
+}
 
-cat /etc/paths >>"$TEMP_FILE"
+TEMP_PATH=""
+
+if [ -n "${HOME:-}" ] && [ -d "$HOME/.config/paths.d" ]; then
+    for f in "$HOME"/.config/paths.d/*; do
+        TEMP_PATH=$(read_paths "$TEMP_PATH" "$f")
+    done
+fi
 
 for f in /etc/paths.d/*; do
-    cat "$f" >>"$TEMP_FILE"
+    TEMP_PATH=$(read_paths "$TEMP_PATH" "$f")
 done
 
-for g in "$HOME"/.config/paths.d/*; do
-    cat "$g" >>"$TEMP_FILE"
-done
+TEMP_PATH=$(read_paths "$TEMP_PATH" "/etc/paths")
 
-awk '{ a[i++]=$0 } END { for(j=i-1 ; j>=0; j--) printf("%s\n", a[j]) }' "$TEMP_FILE" | tr '\n' ':' | sed -E -e 's/::/:/g' -e 's/:+$//g'
+if [ -n "${HOME:-}" ]; then
+    TEMP_PATH="${TEMP_PATH//\$HOME/$HOME}"
+    TEMP_PATH="${TEMP_PATH//\${HOME\}/$HOME}"
+fi
+
+echo "$TEMP_PATH"
