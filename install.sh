@@ -6,4 +6,8 @@ if ! command -v chezmoi; then
     sh -c "$(curl -fsLS get.chezmoi.io)"
 fi
 
-chezmoi init --apply ericsuh/dotfiles2
+if [ -d ~/.local/share/chezmoi ]; then
+    chezmoi update --apply --keep-going
+else
+    chezmoi init --apply ericsuh/dotfiles2
+fi

@@ -1,5 +1,2 @@
 README.md
 install.sh
-{{- if ne .chezmoi.os "linux" }}
-dot_dir_colors
-{{- end }}
