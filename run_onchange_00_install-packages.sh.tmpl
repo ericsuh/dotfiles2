@@ -27,7 +27,7 @@ sudo add-apt-repository {{ range .packages.ubuntu.apt_repository }}{{ . | quote 
 sudo apt-get update
 sudo apt-get install --yes {{ range .packages.ubuntu.apts }}{{ . | quote }}{{ end }}
 
-{{ if ge .chezmoi.osRelease.versionId "24.04" -}}
+{{ if ge .chezmoi.osRelease.versionID "24.04" -}}
 sudo apt-get install --yes {{ range .packages.ubuntu.apts_noble }}{{ . | quote }}{{ end }}
 {{ end -}}
 
