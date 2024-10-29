@@ -23,12 +23,12 @@ curl -fsSL -o jj.tar.gz https://github.com/martinvonz/jj/releases/download/v0.21
 sudo bash -c "$(curl -fsSL https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh)"
 sudo apt-get update
 sudo apt-get install --yes software-properties-common
-sudo add-apt-repository {{ range .packages.linux.apt_repository }}{{ . | quote }}{{ end }}
+sudo add-apt-repository {{ range .packages.ubuntu.apt_repository }}{{ . | quote }}{{ end }}
 sudo apt-get update
-sudo apt-get install --yes {{ range .packages.linux.apts }}{{ . | quote }}{{ end }}
+sudo apt-get install --yes {{ range .packages.ubuntu.apts }}{{ . | quote }}{{ end }}
 
 {{ if ge .chezmoi.osRelease.versionId "24.04" -}}
-sudo apt-get install --yes {{ range .packages.linux.apts_noble }}{{ . | quote }}{{ end }}
+sudo apt-get install --yes {{ range .packages.ubuntu.apts_noble }}{{ . | quote }}{{ end }}
 {{ end -}}
 
 {{ if eq .chezmoi.arch "arm64" -}}
