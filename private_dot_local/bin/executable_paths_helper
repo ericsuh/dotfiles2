@@ -9,7 +9,7 @@ read_paths() {
             continue
         fi
         TEMP_PATH="${TEMP_PATH:+${TEMP_PATH}:}${p//~/$HOME}"
-    done < "$2"
+    done <"$2"
     echo "$TEMP_PATH"
 }
 
@@ -25,7 +25,9 @@ for f in /etc/paths.d/*; do
     TEMP_PATH=$(read_paths "$TEMP_PATH" "$f")
 done
 
-TEMP_PATH=$(read_paths "$TEMP_PATH" "/etc/paths")
+if [ -r "/etc/paths" ]; then
+    TEMP_PATH=$(read_paths "$TEMP_PATH" "/etc/paths")
+fi
 
 if [ -n "${HOME:-}" ]; then
     TEMP_PATH="${TEMP_PATH//\$HOME/$HOME}"
