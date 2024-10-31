@@ -2,7 +2,7 @@
 /opt/homebrew/bin
 {{ .chezmoi.homeDir }}/Library/pnpm
 {{ else if eq .chezmoi.os "linux" -}}
-{{ .chezmoi.homeDir }}/.local/share/pnpm"
+{{ .chezmoi.homeDir }}/.local/share/pnpm
 {{ end -}}
 {{ .chezmoi.homeDir }}/.cargo/bin
 {{ .chezmoi.homeDir }}/.nodenv/shims
