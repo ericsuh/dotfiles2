@@ -45,9 +45,6 @@
     diff = true
     branch = true
 
-[include]
-    path = ~/.gitconfig_local
-
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
@@ -59,9 +56,19 @@
 	ff = only
 [difftool]
 	prompt = false
+
+{{ if eq .chezmoi.os "darwin" -}}
 [credential "https://github.com"]
-	helper = 
 	helper = !/opt/homebrew/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
 	helper = !/opt/homebrew/bin/gh auth git-credential
+{{ else if eq .chezmoi.os "linux" -}}
+[credential "https://github.com"]
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = !/usr/bin/gh auth git-credential
+{{ end -}}
+
+[include]
+    path = ~/.gitconfig_local
+
