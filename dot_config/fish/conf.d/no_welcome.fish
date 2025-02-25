@@ -1,1 +1,1 @@
-set -xg fish_greeting ""
+set --export --global fish_greeting ""
