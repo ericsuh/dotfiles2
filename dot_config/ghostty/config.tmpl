@@ -1,0 +1,7 @@
+{{ if eq .chezmoi.os "darwin" }}
+command = /opt/homebrew/bin/fish
+initial-command = /opt/homebrew/bin/fish
+{{ else if eq .chezmoi.os "linux" }}
+command = /usr/local/bin/fish
+initial-command = /usr/local/bin/fish
+{{ end }}

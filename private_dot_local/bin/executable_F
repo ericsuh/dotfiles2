@@ -7,10 +7,10 @@ MATCH_LINE=$(echo "$MATCH" | cut -d" " -f1)
 MATCH_FILE=$(echo "$MATCH" | sed 's/'$MATCH_LINE' //')
 
 case "$EDITOR" in
-	code)
+	*code)
 		code --goto "${MATCH_FILE}:${MATCH_LINE}"
 		;;
-	nano | nvim | pico | vim)
+	*nano | *nvim | *pico | *vim)
         "$EDITOR" +"${MATCH_LINE}" "${MATCH_FILE}"
 		;;
 	*)
