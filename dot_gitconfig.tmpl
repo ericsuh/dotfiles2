@@ -7,21 +7,11 @@
 [column]
     ui = auto
 [core]
+    editor = vim
     excludesfile = ~/.gitignore
 	fsmonitor = true
 	untrackedCache = true
     # pager = delta
-{{ if eq .chezmoi.os "darwin" -}}
-[credential "https://github.com"]
-	helper = !/opt/homebrew/bin/gh auth git-credential
-[credential "https://gist.github.com"]
-	helper = !/opt/homebrew/bin/gh auth git-credential
-{{ else if eq .chezmoi.os "linux" -}}
-[credential "https://github.com"]
-	helper = !/usr/bin/gh auth git-credential
-[credential "https://gist.github.com"]
-	helper = !/usr/bin/gh auth git-credential
-{{ end -}}
 [delta]
     navigate = true
     light = true
