@@ -36,7 +36,7 @@ if [ -n "${HOME:-}" ]; then
     TEMP_PATH="${TEMP_PATH//\${HOME\}/$HOME}"
 fi
 
-if [ ! -n "${TERM_PATH:-}" ]; then
+if [ -z "${TEMP_PATH:-}" ]; then
     TEMP_PATH="/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin"
 fi
 
