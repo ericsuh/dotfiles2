@@ -9,21 +9,11 @@ read_paths() {
             continue
         fi
         TEMP_PATH="${TEMP_PATH:+${TEMP_PATH}:}${p//~/$HOME}"
-    done <"$2"
+    done < "$2"
     echo "$TEMP_PATH"
 }
 
 TEMP_PATH=""
-
-if [ "$VSCODE_INJECTION" = "1" ]; then
-	if which code >/dev/null; then
-        TEMP_PATH="$(dirname $(which code))"
-	else
-		if which cursor >/dev/null; then
-			TEMP_PATH="$(dirname $(which cursor))"
-		fi
-	fi
-fi
 
 if [ -n "${HOME:-}" ] && [ -d "$HOME/.config/paths.d" ]; then
     for f in "$HOME"/.config/paths.d/*; do
@@ -31,17 +21,29 @@ if [ -n "${HOME:-}" ] && [ -d "$HOME/.config/paths.d" ]; then
     done
 fi
 
-for f in /etc/paths.d/*; do
-    TEMP_PATH=$(read_paths "$TEMP_PATH" "$f")
-done
+if [ -d /etc/paths.d ]; then
+	for f in /etc/paths.d/*; do
+		TEMP_PATH=$(read_paths "$TEMP_PATH" "$f")
+	done
+fi
 
-if [ -r "/etc/paths" ]; then
+if [ -r /etc/paths ]; then
     TEMP_PATH=$(read_paths "$TEMP_PATH" "/etc/paths")
 fi
 
 if [ -n "${HOME:-}" ]; then
     TEMP_PATH="${TEMP_PATH//\$HOME/$HOME}"
     TEMP_PATH="${TEMP_PATH//\${HOME\}/$HOME}"
+fi
+
+if [ ! -n "${TERM_PATH:-}" ]; then
+    TEMP_PATH="/usr/local/bin:/usr/bin:/usr/sbin:/bin:/sbin"
+fi
+
+if [ "$TERM_PROGRAM" = "vscode" ] && which cursor >/dev/null; then
+    TEMP_PATH="$(dirname $(which cursor))"
+elif [ "$TERM_PROGRAM" = "vscode" ] && which code >/dev/null; then
+    TEMP_PATH="$(dirname $(which code))"
 fi
 
 echo "$TEMP_PATH"

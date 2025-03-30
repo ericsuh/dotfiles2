@@ -1,6 +1,7 @@
 """""""""""""""""""""
 " Core vim settings "
 
+set autoindent
 set nocompatible
 set visualbell
 set encoding=utf-8
@@ -29,52 +30,6 @@ set ignorecase
 set smartcase
 nnoremap <leader>/ :noh<CR>  " Allows ,/ to clear search highlights
 set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
-
-"""""""""""""""""""
-" Plugin settings "
-
-""" CoC
-
-let g:coc_global_extensions = [ 'coc-tsserver', 'coc-prettier' ]
-nmap <leader>ca <Plug>(coc-codeaction-line)
-nmap <leader>cc <Plug>(coc-fix-current)
-nmap <leader>rn <Plug>(coc-rename)
-nmap <leader>rf <Plug>(coc-refactor)
-xmap <leader>ff  <Plug>(coc-format-selected)
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Map <tab> for trigger completion, completion confirm, and jump
-inoremap <silent><expr> <TAB>
-  \ pumvisible() ? coc#_select_confirm() :
-  \ coc#expandableOrJumpable() ?
-  \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ coc#refresh()
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
-
-""" typescript-vim
-
-let g:typescript_compiler_options = ''
 
 """" Indent Guides
 

@@ -11,15 +11,19 @@ mkdir -p "$HOME/.local/share"
 {{ if eq .chezmoi.os "darwin" -}}
 
 brew update
-brew bundle --no-lock --file=/dev/stdin <<EOF
+brew bundle --file=/dev/stdin <<EOF
 {{ range .packages.darwin.brews -}}
 brew {{ . | quote }}
 {{ end -}}
 EOF
-curl -fsSL -o jj.tar.gz https://github.com/martinvonz/jj/releases/download/v0.21.0/jj-v0.21.0-aarch64-apple-darwin.tar.gz
-tar xzf jj.tar.gz
-mv jj $HOME/.local/bin/
+curl -fsSL https://github.com/jj-vcs/jj/releases/download/v0.27.0/jj-v0.27.0-aarch64-apple-darwin.tar.gz | tar xzf - --directory $HOME/.local/bin
+curl https://mise.jdx.dev/mise-latest-macos-arm64 > ~/.local/bin/mise
+chmod +x ~/.local/bin/mise
+{{ else if eq .chezmoi.os "linux" -}}
+curl https://mise.jdx.dev/mise-latest-linux-x64 > ~/.local/bin/mise
+chmod +x ~/.local/bin/mise
 {{ end -}}
+
 # We don't do anything for ubuntu because the installation may conflict with existing stuff
 
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s - -y --no-modify-path
