@@ -19,7 +19,9 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden'
 {{ if eq .chezmoi.os "darwin" -}}
 [ -f "/opt/homebrew/opt/fzf/shell/key-bindings.bash" ] && source "/opt/homebrew/opt/fzf/shell/key-bindings.bash"
 [ -f "/opt/homebrew/opt/fzf/shell/key-bindings.bash" ] && source "/opt/homebrew/opt/fzf/shell/completion.bash"
+/opt/homebrew/bin/mise activate bash | source
 {{ else if eq .chezmoi.os "linux" -}}
+/usr/local/bin/mise activate bash | source
 [ -f "/usr/share/doc/fzf/examples/key-bindings.bash" ] && source "/usr/share/doc/fzf/examples/key-bindings.bash"
 [ -f "/usr/share/doc/fzf/examples/completion.bash" ] && source "/usr/share/doc/fzf/examples/completion.bash"
 {{ end -}}

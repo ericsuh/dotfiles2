@@ -1,0 +1,18 @@
+[tools]
+ast-grep = 'latest'
+cargo-binstall = 'latest'
+chezmoi = 'latest'
+difftastic = 'latest'
+eza = 'latest'
+fd = 'latest'
+fzf = 'latest'
+github-cli = 'latest'
+go = 'latest'
+jj = 'latest'
+jq = 'latest'
+neovim = '0.11'
+ripgrep = 'latest'
+rust-analyzer = 'latest'
+tmux = 'latest'
+tree-sitter = 'latest'
+
