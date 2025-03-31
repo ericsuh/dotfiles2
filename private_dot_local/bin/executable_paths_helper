@@ -41,9 +41,9 @@ if [ -z "${TEMP_PATH:-}" ]; then
 fi
 
 if [ "$TERM_PROGRAM" = "vscode" ] && which cursor >/dev/null; then
-    TEMP_PATH="$(dirname $(which cursor))"
+    TEMP_PATH="$(dirname $(which cursor))${TEMP_PATH:+:${TEMP_PATH}}"
 elif [ "$TERM_PROGRAM" = "vscode" ] && which code >/dev/null; then
-    TEMP_PATH="$(dirname $(which code))"
+    TEMP_PATH="$(dirname $(which code))${TEMP_PATH:+:${TEMP_PATH}}"
 fi
 
 echo "$TEMP_PATH"
