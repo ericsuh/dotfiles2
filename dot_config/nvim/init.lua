@@ -1,15 +1,20 @@
-vim.o.number = true -- Enable line numbers
-vim.o.tabstop = 4 -- Number of spaces to visualize a tab
-vim.o.shiftwidth = 4 -- Number of spaces for each indentation
-vim.o.expandtab = true -- Convert tabs to spaces
-vim.o.smartindent = true -- Autoindent new lines
-vim.o.cursorline = true -- Highlight current line
-vim.o.termguicolors = true -- Enable 24-bit color
+local global = vim.g
+local o = vim.opt
 
-vim.cmd('syntax enable')
+o.number = true -- Enable line numbers
+o.clipboard = "unnamedplus"
+o.tabstop = 4 -- Number of spaces to visualize a tab
+o.shiftwidth = 4 -- Number of spaces for each indentation
+o.expandtab = true -- Convert tabs to spaces
+o.smartindent = true -- Autoindent new lines
+o.cursorline = true -- Highlight current line
+o.termguicolors = true -- Enable 24-bit color
+o.syntax = "on"
+o.encoding = "UTF-8"
+
 vim.cmd('filetype plugin indent on')
 
-vim.g.mapleader = ','
+global.mapleader = ','
 vim.keymap.set('n', 'Y', 'yy', { remap = true })
 
 vim.treesitter.language.add('go')
