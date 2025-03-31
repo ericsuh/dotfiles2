@@ -25,6 +25,7 @@ vim.treesitter.language.add('python')
 
 vim.lsp.enable({'gopls', 'rust-analyzer', 'typescript-language-server' })
 
+require("config.maps")
 require("config.lazy")
 
 vim.api.nvim_create_autocmd('LspAttach', {
