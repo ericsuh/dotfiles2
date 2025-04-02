@@ -13,6 +13,5 @@ jq = 'latest'
 neovim = '0.11'
 ripgrep = 'latest'
 rust-analyzer = 'latest'
-tmux = 'latest'
 tree-sitter = 'latest'
 
