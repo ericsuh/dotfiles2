@@ -14,4 +14,4 @@ neovim = '0.11'
 ripgrep = 'latest'
 rust-analyzer = 'latest'
 tree-sitter = 'latest'
-
+usage = 'latest'
