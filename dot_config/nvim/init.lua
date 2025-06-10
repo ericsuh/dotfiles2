@@ -17,7 +17,16 @@ vim.cmd('filetype plugin indent on')
 global.mapleader = ','
 vim.keymap.set('n', 'Y', 'yy', { remap = true })
 
-vim.lsp.enable({'gopls', 'rust-analyzer', 'typescript-language-server' })
+vim.lsp.enable({
+    'bashls',
+    'eslint',
+    'golantci-lint-ls',
+    'gopls',
+    'ruff',
+    'rust-analyzer',
+    'terraformls',
+    'typescript-language-server',
+})
 
 require("config.maps")
 require("config.lazy")
