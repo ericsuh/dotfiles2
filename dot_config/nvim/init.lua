@@ -17,12 +17,6 @@ vim.cmd('filetype plugin indent on')
 global.mapleader = ','
 vim.keymap.set('n', 'Y', 'yy', { remap = true })
 
-vim.treesitter.language.add('go')
-vim.treesitter.language.add('javascript')
-vim.treesitter.language.add('typescript')
-vim.treesitter.language.add('rust')
-vim.treesitter.language.add('python')
-
 vim.lsp.enable({'gopls', 'rust-analyzer', 'typescript-language-server' })
 
 require("config.maps")

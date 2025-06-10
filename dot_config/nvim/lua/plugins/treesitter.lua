@@ -1,6 +1,8 @@
 return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
+    branch = "main",
+    lazy = false,
     config = function () 
         local configs = require("nvim-treesitter.configs")
 
@@ -11,20 +13,29 @@ return {
                 "css",
                 "dockerfile",
                 "gitignore",
+                "go",
+                "gotmpl",
                 "html",
                 "javascript",
                 "json",
+                "jsonc",
                 "lua",
+                "make",
                 "markdown",
                 "markdown_inline",
                 "python",
                 "query",
                 "rust",
+                "sql",
+                "starlark",
+                "terraform",
+                "toml",
                 "tsx",
                 "typescript",
                 "vim",
                 "vimdoc",
                 "yaml",
+                "zig",
             },
             sync_install = false,
             highlight = {
