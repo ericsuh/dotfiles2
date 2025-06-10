@@ -1,17 +1,25 @@
 [tools]
-ast-grep = 'latest'
-cargo-binstall = 'latest'
-chezmoi = 'latest'
-difftastic = 'latest'
-eza = 'latest'
-fd = 'latest'
-fzf = 'latest'
-github-cli = 'latest'
-go = 'latest'
-jj = 'latest'
-jq = 'latest'
-neovim = '0.11'
-ripgrep = 'latest'
-rust-analyzer = 'latest'
-tree-sitter = 'latest'
-usage = 'latest'
+ast-grep = "latest"
+cargo-binstall = "latest"
+chezmoi = "latest"
+difftastic = "latest"
+eza = "latest"
+fd = "latest"
+fzf = "latest"
+github-cli = "latest"
+go = "latest"
+jj = "latest"
+jq = "latest"
+neovim = "0.11"
+node = "22"
+pnpm = "latest"
+ripgrep = "latest"
+tree-sitter = "latest"
+usage = "latest"
+uv = "latest"
+yq = "latest"
+"npm:@anthropic-ai/claude-code" = "latest"
+
+[settings]
+experimental = true
+lockfile = true
