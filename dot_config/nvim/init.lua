@@ -18,14 +18,12 @@ global.mapleader = ','
 vim.keymap.set('n', 'Y', 'yy', { remap = true })
 
 vim.lsp.enable({
-    'bashls',
-    'eslint',
-    'golantci-lint-ls',
+    'golangci_lint_ls',
     'gopls',
     'ruff',
-    'rust-analyzer',
+    'rust_analyzer',
     'terraformls',
-    'typescript-language-server',
+    'typescript_language_server',
 })
 
 require("config.maps")
