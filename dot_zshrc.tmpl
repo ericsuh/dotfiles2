@@ -65,9 +65,6 @@ if command -v jj >/dev/null; then
   source <(jj util completion zsh)
 fi
 
-PATH="$($HOME/.local/bin/paths_helper)"
-export PATH
-
 # Evaluated on login, so affects scripts
 eval "$(/opt/homebrew/bin/brew shellenv)"
 

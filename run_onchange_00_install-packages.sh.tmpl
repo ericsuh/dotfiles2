@@ -16,9 +16,6 @@ brew bundle --file=/dev/stdin <<EOF
 brew {{ . | quote }}
 {{ end -}}
 EOF
-curl -fsSL https://github.com/jj-vcs/jj/releases/download/v0.27.0/jj-v0.27.0-aarch64-apple-darwin.tar.gz | tar xzf - --directory $HOME/.local/bin
-curl https://mise.jdx.dev/mise-latest-macos-arm64 > ~/.local/bin/mise
-chmod +x ~/.local/bin/mise
 {{ else if eq .chezmoi.os "linux" -}}
 curl https://mise.jdx.dev/mise-latest-linux-x64 > ~/.local/bin/mise
 chmod +x ~/.local/bin/mise

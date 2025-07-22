@@ -14,7 +14,6 @@ neovim = "0.11.2"
 node = "22"
 pnpm = "latest"
 ripgrep = "latest"
-tree-sitter = "latest"
 usage = "latest"
 uv = "latest"
 yq = "latest"
@@ -23,3 +22,15 @@ yq = "latest"
 [settings]
 experimental = true
 lockfile = true
+python.uv_venv_auto = false
+
+[env]
+_.path = [
+  "~/.local/share/mise/shims",
+  "~/Library/pnpm",
+  "~/.local/share/pnpm",
+  "~/.cargo/bin",
+  "~/go/bin",
+  "~/.local/bin",
+  "/opt/homebrew/bin",
+]

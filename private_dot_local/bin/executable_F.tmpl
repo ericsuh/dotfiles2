@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-MATCH=$(sed -n "$1p" < /Users/eric/.srgmatches)
+MATCH=$(sed -n "$1p" < {{ .chezmoi.homeDir }}/.srgmatches)
 MATCH_LINE=$(echo "$MATCH" | cut -d" " -f1)
 MATCH_FILE=$(echo "$MATCH" | sed 's/'$MATCH_LINE' //')
 
