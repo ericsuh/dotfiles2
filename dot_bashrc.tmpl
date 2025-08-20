@@ -30,5 +30,6 @@ fi
 [ -f "${HOME}/.bashrc_local" ] && source "${HOME}/.bashrc_local"
 
 if command -v jj >/dev/null; then
+    jj --version
     source <(jj util completion bash)
 fi
