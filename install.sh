@@ -2,12 +2,16 @@
 
 set -euo pipefail
 
-if ! command -v chezmoi; then
+CMD=chezmoi
+if ! command -v chezmoi >/dev/null; then
+    pushd ~/.local >/dev/null
     sh -c "$(curl -fsLS get.chezmoi.io)"
+    CMD=~/.local/bin/chezmoi
+    popd
 fi
 
 if [ -d ~/.local/share/chezmoi ]; then
-    chezmoi update --apply --keep-going --force
+    "$CMD" update --apply --keep-going --force
 else
-    chezmoi init --apply --force ericsuh/dotfiles2
+    "$CMD" init --apply --force ericsuh/dotfiles2
 fi

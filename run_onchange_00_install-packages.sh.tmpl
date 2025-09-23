@@ -8,21 +8,24 @@ trap "rm -rf $TEMPDIR" EXIT
 mkdir -p "$HOME/.local/bin"
 mkdir -p "$HOME/.local/share"
 
+PATH="$HOME/.local/bin${PATH:+:${PATH}}"
+
 {{ if eq .chezmoi.os "darwin" -}}
+if command -v brew >/dev/null; then
+    pushd ~/.config/brew >/dev/null
+    brew update
+    brew bundle check || brew bundle install
+    popd >/dev/null
+else
+    echo "Install Homebrew in order to install the rest of the dependencies"
+fi
+{{ end }}
 
-brew update
-brew bundle --file=/dev/stdin <<EOF
-{{ range .packages.darwin.brews -}}
-brew {{ . | quote }}
-{{ end -}}
-EOF
+if ! command -v mise >/dev/null; then
+{{ if eq .chezmoi.os "darwin" -}}
+    curl https://mise.jdx.dev/mise-latest-macos-arm64 > ~/.local/bin/mise
 {{ else if eq .chezmoi.os "linux" -}}
-curl https://mise.jdx.dev/mise-latest-linux-x64 > ~/.local/bin/mise
-chmod +x ~/.local/bin/mise
-{{ end -}}
-
-# We don't do anything for ubuntu because the installation may conflict with existing stuff
-
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s - -y --no-modify-path
-curl -LsSf https://astral.sh/uv/install.sh | sh
-
+    curl https://mise.jdx.dev/mise-latest-linux-x64 > ~/.local/bin/mise
+{{ end }}
+    chmod +x ~/.local/bin/mise
+fi

@@ -1,0 +1,4 @@
+ppa "fish-shell/release-3"
+package "fish"
+package "git"
+package "mise"
