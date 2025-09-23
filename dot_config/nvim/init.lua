@@ -19,13 +19,18 @@ vim.keymap.set('n', 'Y', 'yy')
 vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float)
 vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action)
 
+vim.diagnostic.enable = true
+vim.diagnostic.config({
+  virtual_lines = true,
+})
+
 vim.lsp.enable({
-    'golangci_lint_ls',
-    'gopls',
-    'ruff',
-    'rust_analyzer',
-    'terraformls',
-    'typescript_language_server',
+  'golangci_lint_ls',
+  'gopls',
+  'ruff',
+  'rust_analyzer',
+  'terraformls',
+  'typescript_language_server',
 })
 
 require("config.maps")
