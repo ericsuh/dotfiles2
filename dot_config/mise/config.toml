@@ -1,7 +1,6 @@
 [tools]
 ast-grep = "latest"
 cargo-binstall = "latest"
-chezmoi = "latest"
 difftastic = "latest"
 eza = "latest"
 fd = "latest"
@@ -11,7 +10,7 @@ go = "latest"
 jj = "0.32"
 jq = "latest"
 neovim = "0.11.2"
-node = "22"
+node = "24"
 pnpm = "latest"
 python = "3.13"
 ripgrep = "latest"
@@ -19,6 +18,7 @@ usage = "latest"
 uv = "latest"
 yq = "latest"
 "npm:@anthropic-ai/claude-code" = "latest"
+"npm:@openai/codex" = "latest"
 
 [settings]
 experimental = true
