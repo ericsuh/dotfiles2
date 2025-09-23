@@ -53,13 +53,9 @@ function source_exists() {
   fi
 }
 
-{{ if eq .chezmoi.os "darwin" -}}
-source_exists /opt/homebrew/opt/fzf/shell/key-bindings.zsh
-source_exists /opt/homebrew/opt/fzf/shell/completion.zsh
-{{ else if eq .chezmoi.os "linux" -}}
-source_exists /usr/share/doc/fzf/examples/key-bindings.zsh
-source_exists /usr/share/doc/fzf/examples/completion.zsh
-{{ end -}}
+if command -v fzf >/dev/null; then
+    source <(fzf --zsh)
+fi
 
 if command -v jj >/dev/null; then
   source <(jj util completion zsh)

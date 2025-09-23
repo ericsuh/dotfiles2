@@ -11,18 +11,22 @@ export LC_CTYPE=en_US.UTF-8 # For possible non-ASCII filenames
 export PS1="\[\033k\033\\\033[7h\]\W \\$ "
 export PS1="\[\e[1;30m\]\W\[\e[m\] \\$ "
 export CLICOLOR=1
-export FZF_DEFAULT_COMMAND='rg --files --hidden'
+
+{{ if eq .chezmoi.os "darwin" }}
+# This is BSD color format
+export LSCOLORS=cxfxdxdxbxehehbhbhchch
+{{ else if eq .chezmoi.os "linux" }}
+export LS_COLORS="${LS_COLORS}:di=32:ln=35:so=33:pi=33:ex=31:bd=34;47:cd=34;47:su=31;47:sg=31;47:tw=32;47:ow=32;47"
+{{ end }}
 
 [ -f "${HOME}/.bash_aliases" ] && source "${HOME}/.bash_aliases"
 [ -f "${HOME}/.git-completion.bash" ] && source "${HOME}/.git-completion.bash"
 
-{{ if eq .chezmoi.os "darwin" -}}
-[ -f "/opt/homebrew/opt/fzf/shell/key-bindings.bash" ] && source "/opt/homebrew/opt/fzf/shell/key-bindings.bash"
-[ -f "/opt/homebrew/opt/fzf/shell/key-bindings.bash" ] && source "/opt/homebrew/opt/fzf/shell/completion.bash"
-{{ else if eq .chezmoi.os "linux" -}}
-[ -f "/usr/share/doc/fzf/examples/key-bindings.bash" ] && source "/usr/share/doc/fzf/examples/key-bindings.bash"
-[ -f "/usr/share/doc/fzf/examples/completion.bash" ] && source "/usr/share/doc/fzf/examples/completion.bash"
-{{ end -}}
+if command -v fzf >/dev/null; then
+    eval "$(fzf  --bash)"
+fi
+export FZF_DEFAULT_COMMAND='rg --files --hidden'
+
 if command -v mise >/dev/null; then
     eval "$(mise activate bash)"
 fi
@@ -33,3 +37,11 @@ if command -v jj >/dev/null; then
     jj --version
     source <(jj util completion bash)
 fi
+
+if command -v nvim >/dev/null; then
+    export EDITOR=nvim
+elif command -v vim >/dev/null; then
+    export EDITOR=vim
+fi
+
+export PYTHONSTARTUP="${HOME}/.pythonrc"
