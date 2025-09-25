@@ -32,6 +32,4 @@ _.path = [
   "~/.local/share/pnpm",
   "~/.cargo/bin",
   "~/go/bin",
-  "~/.local/bin",
-  "/opt/homebrew/bin",
 ]

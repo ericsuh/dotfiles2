@@ -7,3 +7,13 @@ if status --is-interactive
         set --export --global EDITOR (command --search vim)
     end
 end
+
+{{ if eq .chezmoi.os "darwin" -}}
+fish_add_path /opt/homebrew/bin
+{{ else if eq .chezmoi.os "linux" -}}
+fish_add_path ~/.local/bin
+{{ end -}}
+
+if test -r "$HOME/.cargo/env.fish"
+    source "$HOME/.cargo/env.fish"
+end
