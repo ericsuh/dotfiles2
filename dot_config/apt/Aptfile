@@ -1,4 +1,5 @@
 ppa "fish-shell/release-3"
+package "curl"
 package "fish"
 package "git"
 package "mise"

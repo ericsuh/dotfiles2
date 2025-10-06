@@ -15,3 +15,4 @@ if [ -d ~/.local/share/chezmoi ]; then
 else
     "$CMD" init --apply --force ericsuh/dotfiles2
 fi
+

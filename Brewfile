@@ -1,5 +1,0 @@
-brew "coreutils"
-brew "git"
-brew "git-lfs"
-brew "mise"
-brew "watchman"
