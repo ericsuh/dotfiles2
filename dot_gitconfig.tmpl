@@ -9,53 +9,51 @@
 [core]
     editor = vim
     excludesfile = ~/.gitignore
-	fsmonitor = true
-	untrackedCache = true
-    # pager = delta
+    fsmonitor = true
+    untrackedCache = true
+    longpaths = true
 [delta]
     navigate = true
     light = true
 [diff]
     algorithm = histogram
     colorMoved = plain
-	mnemonicPrefix = true
-	renames = true
+    mnemonicPrefix = true
+    renames = true
 [difftool]
-	prompt = false
+    prompt = false
 [fetch]
-	prune = true
-	pruneTags = true
-	all = true
+    prune = true
+    pruneTags = true
+    all = true
 [filter "lfs"]
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+    clean = git-lfs clean -- %f
 [help]
-	autocorrect = prompt
+    autocorrect = prompt
 [init]
-	defaultBranch = main
-[interactive]
-    # diffFilter = delta --color-only
+    defaultBranch = main
 [merge]
     conflictstyle = zdiff3
 [pull]
-	ff = only
-	rebase = true
+    ff = only
+    rebase = true
 [push]
-	default = simple
-	autoSetupRemote = true
-	followTags = true
+    default = simple
+    autoSetupRemote = true
+    followTags = true
 [rebase]
     state = true
     updateRefs = true
-	autoStash = true
-	autoSquash = true
+    autoStash = true
+    autoSquash = true
 [rerere]
-	enabled = true
-	autoupdate = true
+    enabled = true
+    autoupdate = true
 [tag]
-	sort = version:refname
+    sort = version:refname
 
 [alias]
     st = status -sb

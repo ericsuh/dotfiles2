@@ -19,6 +19,8 @@ export LSCOLORS=cxfxdxdxbxehehbhbhchch
 export LS_COLORS="${LS_COLORS}:di=32:ln=35:so=33:pi=33:ex=31:bd=34;47:cd=34;47:su=31;47:sg=31;47:tw=32;47:ow=32;47"
 {{ end }}
 
+export PATH="${HOME}/.local/bin${PATH:+:${PATH}}"
+
 [ -f "${HOME}/.bash_aliases" ] && source "${HOME}/.bash_aliases"
 [ -f "${HOME}/.git-completion.bash" ] && source "${HOME}/.git-completion.bash"
 
@@ -34,7 +36,6 @@ fi
 [ -f "${HOME}/.bashrc_local" ] && source "${HOME}/.bashrc_local"
 
 if command -v jj >/dev/null; then
-    jj --version
     source <(jj util completion bash)
 fi
 
@@ -45,3 +46,7 @@ elif command -v vim >/dev/null; then
 fi
 
 export PYTHONSTARTUP="${HOME}/.pythonrc"
+
+{{ if (and (eq .chezmoi.os "linux") (.chezmoi.kernel.osrelease | lower | contains "microsoft")) }}
+export BROWSER=/mnt/c/Program\ Files\ \(x86\)/Microsoft/Edge/Application/msedge.exe
+{{ end }}
