@@ -29,3 +29,8 @@ if [ -d ~/.local/share/chezmoi ]; then
 else
     mise exec -- chezmoi init --apply --force ericsuh/dotfiles2
 fi
+
+if [ "${DOTNET:-}" != "" ]; then
+    curl -O https://builds.dotnet.microsoft.com/dotnet/scripts/v1/dotnet-install.sh
+    sudo bash dotnet-install.sh --channel '8.0' --install-dir /usr/lib/dotnet
+fi
