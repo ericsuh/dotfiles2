@@ -11,7 +11,7 @@ if ! command -v curl >/dev/null; then
     sudo apt-get install --yes --no-install-recommends curl
 fi
 
-curl -fsSL -o "$HOME/.local/mise/config.toml" https://raw.githubusercontent.com/ericsuh/dotfiles2/refs/heads/main/dot_config/mise/config.toml
+curl -fsSL -o "$HOME/.config/mise/config.toml" https://raw.githubusercontent.com/ericsuh/dotfiles2/refs/heads/main/dot_config/mise/config.toml
 
 if ! command -v mise >/dev/null; then
     curl -fsSL https://mise.run | sh
