@@ -1,0 +1,33 @@
+# Added by OrbStack: 'orb' SSH host for Linux machines
+# This only works if it's at the top of ssh_config (before any Host blocks).
+# Comment this line if you don't want it to be added again.
+
+{{ if eq .chezmoi.os "darwin" }}
+Include ~/.orbstack/ssh/config
+{{ end }}
+
+Host *
+{{ if eq .chezmoi.os "darwin" }}
+  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+{{ end }}
+  AddKeysToAgent yes
+  UseKeychain yes
+
+Host www-ericsuh
+  HostName ericsuh.com
+  User ubuntu
+  IdentityFile ~/.ssh/id_ed25519_gh
+
+Host github.com
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/id_ed25519_gh
+
+Host oregon
+  HostName 34.213.115.59
+  User eric
+  IdentityFile ~/.ssh/id_ed25519
+
+Host oregon-ubuntu
+  HostName 34.213.115.59
+  User ubuntu
+  IdentityFile ~/.ssh/oregon-1-admin-key.pem

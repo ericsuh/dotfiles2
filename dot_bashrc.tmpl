@@ -45,6 +45,14 @@ elif command -v vim >/dev/null; then
     export EDITOR=vim
 fi
 
+{{ if eq .chezmoi.os "darwin" }}
+export BROWSER="open"
+{{ else if eq .chezmoi.os "linux" }}
+{{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+export BROWSER="/mnt/c/Program Files/"
+{{   end }}
+{{ end }}
+
 export PYTHONSTARTUP="${HOME}/.pythonrc"
 
 {{ if (and (eq .chezmoi.os "linux") (.chezmoi.kernel.osrelease | lower | contains "microsoft")) }}

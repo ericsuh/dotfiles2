@@ -1,4 +1,6 @@
-# Installation
+# Chezmoi-based dotfiles/configs
+
+
 
 ## Other apps
 
