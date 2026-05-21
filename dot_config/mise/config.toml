@@ -1,3 +1,4 @@
+#:schema https://mise.jdx.dev/schema/mise.json
 [tools]
 ast-grep = "latest"
 cargo-binstall = "latest"
@@ -6,6 +7,7 @@ eza = "latest"
 fd = "latest"
 fzf = "latest"
 github-cli = "latest"
+git-lfs = "latest"
 glow = "latest"
 jj = "0.34"
 jq = "latest"
@@ -36,3 +38,10 @@ _.path = [
   "~/.cargo/bin",
   "~/go/bin",
 ]
+
+[shell_alias]
+ll = "ls -la"
+gco = "git checkout"
+gs = "git status"
+gcb = "git checkout -b"
+gll = "git log"
