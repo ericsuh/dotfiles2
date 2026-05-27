@@ -1,3 +1,3 @@
-if command -v fish >/dev/null
+if command -v fzf >/dev/null
     fzf --fish | source
 end
