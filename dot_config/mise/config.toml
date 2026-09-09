@@ -1,28 +1,26 @@
 #:schema https://mise.jdx.dev/schema/mise.json
 [tools]
 ast-grep = "latest"
+awscli = "latest"
 cargo-binstall = "latest"
+claude-code = "latest"
 difftastic = "latest"
+dive = "latest"
 eza = "latest"
 fd = "latest"
 fzf = "latest"
-github-cli = "latest"
 git-lfs = "latest"
+github-cli = "latest"
+"github:docker/sbx-releases" = "latest"
 glow = "latest"
-jj = "0.34"
+jj = "latest"
 jq = "latest"
 neovim = "0.11"
-node = "24"  # for codex/claude code
-pnpm = "latest"  # for codex/claude code
 ripgrep = "latest"
-shellcheck = "latest"
 tree-sitter = "0.25.3"
 usage = "latest"
 uv = "latest"
 yq = "latest"
-"npm:@anthropic-ai/claude-code" = "latest"
-"npm:@openai/codex" = "latest"
-"npm:@github/copilot" = "latest"
 
 [settings]
 experimental = true

@@ -60,3 +60,7 @@ tmtags
 xcuserdata
 profile
 *.moved-aside
+
+# AI agent files
+**/.claude/.cc-writes/
+**/.claude/settings.local.json
